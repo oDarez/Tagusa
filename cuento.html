@@ -551,9 +551,15 @@
                 const nextBtn = document.getElementById('nextBtn');
                 if (nextBtn.disabled) return;
             }
-            if (currentStory && storyProgress < currentStory.content.length - 1) {
-                storyProgress++;
-                displayStoryContent();
+            if (currentStory) {
+                if (storyProgress < currentStory.content.length - 1) {
+                    storyProgress++;
+                    displayStoryContent();
+                } else if (storyProgress === currentStory.content.length - 1) {
+                    // Avanza a la moraleja
+                    storyProgress++;
+                    displayStoryContent();
+                }
             }
         }
 
