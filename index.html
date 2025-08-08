@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuentos Infantiles - TAGUSA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <audio id="bgMusic" src="sounds/looprinc.ogg" loop preload="auto" style="display:none"></audio>
+    <div id="welcomeOverlay" style="position:fixed;z-index:9999;inset:0;background:rgba(227,246,255,0.98);display:flex;align-items:center;justify-content:center;flex-direction:column;">
+        <h2 style="color:#1976d2;font-size:2.2em;margin-bottom:1em;">¡Bienvenido a Cuentos TAGUSA!</h2>
+        <button id="startBtn" style="font-size:1.3em;padding:1em 2.5em;border-radius:2em;background:#FFEB3B;color:#1976d2;font-weight:bold;border:none;box-shadow:0 2px 12px #b2eaff33;cursor:pointer;transition:background 0.18s;">Comenzar</button>
+        <p style="margin-top:1.5em;color:#1976d2;opacity:0.7;">Activa el sonido y la magia</p>
+    </div>
+    <!-- Encabezado con logo y navegación -->
+    <header>
+        <div class="header-bar">
+            <div class="logo">
+                <span class="logo-icon" aria-hidden="true">📚</span>
+                Cuentos TAGUSA
+                <span class="logo-sparkle" aria-hidden="true">✨</span>
+            </div>
+            <nav>
+                <div class="hamburger" id="hamburger" aria-label="Abrir menú" tabindex="0">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html" class="nav-link active"><span>🏠</span>Inicio</a>
+                    <a href="niveles.html" class="nav-link"><span>📚</span>Cuentos</a>
+                    <a href="contacto.html" class="nav-link"><span>📬</span>Contacto</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero principal -->
+    <section class="hero" id="inicio">
+        <div class="hero-background">
+            <div class="floating-elements">
+                <div class="float-star">⭐</div>
+                <div class="float-star">🌟</div>
+                <div class="float-star">✨</div>
+                <div class="float-cloud">☁️</div>
+                <div class="float-cloud">🌤️</div>
+            </div>
+        </div>
+        <div class="hero-img">
+            <div class="image-container">
+                <img src="pirataindex.png" alt="Personajes de cuento: princesa, caballero, dragón y castillo" />
+                <div class="image-glow"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="title-line">Cuentos Infantiles</span>
+                <span class="title-line">para Inicial y Primaria</span>
+            </h1>
+            <p class="hero-subtitle">
+                ¡Descubre historias mágicas llenas de fantasía, valores y aventuras!
+                <br>
+                <span class="subtitle-accent">Un mundo de imaginación te espera</span>
+            </p>
+            <div class="hero-buttons">
+                <a href="#cuentos" class="hero-btn primary-btn">
+                    <span class="btn-icon">📖</span>
+                    Leer cuentos
+                </a>
+                <a href="#categorias" class="hero-btn secondary-btn">
+                    <span class="btn-icon">🎭</span>
+                    Explorar
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contador de cuentos -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-label">Cuentos Disponibles</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="1000">0</div>
+                <div class="stat-label">Niños Felices</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" data-target="15">0</div>
+                <div class="stat-label">Categorías</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de categorías -->
+    <section class="categorias" id="cuentos">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-icon">🌈</span>
+                Explora Nuestras Categorías
+                <span class="title-icon">🌈</span>
+            </h2>
+            <p class="section-subtitle">Cada historia es una nueva aventura</p>
+        </div>
+        <div class="categorias-grid">
+            <a class="categoria-card" href="niveles.html" tabindex="0">
+                <div class="card-image">
+                    <img src="elephantindex.png" alt="Categoría Animales">
+                    <div class="card-overlay">
+                        <span class="card-icon">🐘</span>
+                    </div>
+                </div>
+                <h3 class="card-title">Animales</h3>
+                <p class="card-description">Conoce a los amigos del bosque</p>
+                <div class="card-stats">
+                    <span class="stat">🔢 15 cuentos</span>
+                    <span class="stat">⭐ 4.8</span>
+                </div>
+            </a>
+            <a class="categoria-card" href="valores.html" tabindex="0">
+                <div class="card-image">
+                    <img src="valores.png" alt="Categoría Valores">
+                    <div class="card-overlay">
+                        <span class="card-icon">💎</span>
+                    </div>
+                </div>
+                <h3 class="card-title">Valores</h3>
+                <p class="card-description">Aprende mientras te diviertes</p>
+                <div class="card-stats">
+                    <span class="stat">🔢 12 cuentos</span>
+                    <span class="stat">⭐ 4.9</span>
+                </div>
+            </a>
+            <a class="categoria-card" href="aventura.html" tabindex="0">
+                <div class="card-image">
+                    <img src="aventura.png" alt="Categoría Aventura">
+                    <div class="card-overlay">
+                        <span class="card-icon">🗺️</span>
+                    </div>
+                </div>
+                <h3 class="card-title">Aventura</h3>
+                <p class="card-description">Vive emocionantes travesías</p>
+                <div class="card-stats">
+                    <span class="stat">🔢 18 cuentos</span>
+                    <span class="stat">⭐ 4.7</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección de características -->
+    <section class="features-section" style="background: #e3f6ff; padding: 2em 0;">
+        <div class="features-container" style="display: flex; flex-wrap: wrap; gap: 2em; justify-content: center; align-items: stretch;">
+            <div class="feature-item" style="flex:1 1 220px; min-width:220px; max-width:340px; background:#fffbe7; border-radius:20px; box-shadow:0 2px 12px #b2eaff33; padding:1.5em; display:flex; flex-direction:column; align-items:center; text-align:center;">
+                <div class="feature-icon" style="font-size:2.5em; margin-bottom:0.5em;">🎨</div>
+                <h3 style="color:#1976d2; margin-bottom:0.3em;">Ilustraciones Coloridas</h3>
+                <p style="color:#263238; opacity:0.9;">Cada cuento viene con hermosas ilustraciones que capturan la imaginación</p>
+            </div>
+            <div class="feature-item" style="flex:1 1 220px; min-width:220px; max-width:340px; background:#fffbe7; border-radius:20px; box-shadow:0 2px 12px #b2eaff33; padding:1.5em; display:flex; flex-direction:column; align-items:center; text-align:center;">
+                <div class="feature-icon" style="font-size:2.5em; margin-bottom:0.5em;">🎵</div>
+                <h3 style="color:#1976d2; margin-bottom:0.3em;">Narración Interactiva</h3>
+                <p style="color:#263238; opacity:0.9;">Sonidos y efectos que hacen cada historia más emocionante</p>
+            </div>
+            <div class="feature-item" style="flex:1 1 220px; min-width:220px; max-width:340px; background:#fffbe7; border-radius:20px; box-shadow:0 2px 12px #b2eaff33; padding:1.5em; display:flex; flex-direction:column; align-items:center; text-align:center;">
+                <div class="feature-icon" style="font-size:2.5em; margin-bottom:0.5em;">🏆</div>
+                <h3 style="color:#1976d2; margin-bottom:0.3em;">Contenido Educativo</h3>
+                <p style="color:#263238; opacity:0.9;">Historias que enseñan valores importantes de manera divertida</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="testimonials-section" style="background: #e3f6ff; padding: 2em 0;">
+        <div class="testimonials-container" style="max-width:1100px; margin:0 auto;">
+            <h2 class="section-title" style="color:#1976d2; text-align:center; margin-bottom:1.5em;">Lo que dicen nuestros pequeños lectores</h2>
+            <div class="testimonials-grid" style="display:flex; flex-wrap:wrap; gap:2em; justify-content:center;">
+                <div class="testimonial-card" style="flex:1 1 260px; min-width:220px; max-width:340px; background:#fffbe7; border-radius:20px; box-shadow:0 2px 12px #b2eaff33; padding:1.5em; display:flex; flex-direction:column; align-items:center; text-align:center;">
+                    <div class="testimonial-avatar" style="font-size:2.2em; margin-bottom:0.5em;">👧</div>
+                    <p class="testimonial-text" style="color:#263238; opacity:0.95;">"¡Me encantan los cuentos de animales! Son muy divertidos."</p>
+                    <div class="testimonial-author" style="margin-top:0.7em; color:#1976d2;">- María, 7 años</div>
+                </div>
+                <div class="testimonial-card" style="flex:1 1 260px; min-width:220px; max-width:340px; background:#fffbe7; border-radius:20px; box-shadow:0 2px 12px #b2eaff33; padding:1.5em; display:flex; flex-direction:column; align-items:center; text-align:center;">
+                    <div class="testimonial-avatar" style="font-size:2.2em; margin-bottom:0.5em;">👦</div>
+                    <p class="testimonial-text" style="color:#263238; opacity:0.95;">"Las aventuras del pirata son las mejores. ¡Quiero ser como él!"</p>
+                    <div class="testimonial-author" style="margin-top:0.7em; color:#1976d2;">- Carlos, 6 años</div>
+                </div>
+                <div class="testimonial-card" style="flex:1 1 260px; min-width:220px; max-width:340px; background:#fffbe7; border-radius:20px; box-shadow:0 2px 12px #b2eaff33; padding:1.5em; display:flex; flex-direction:column; align-items:center; text-align:center;">
+                    <div class="testimonial-avatar" style="font-size:2.2em; margin-bottom:0.5em;">👩</div>
+                    <p class="testimonial-text" style="color:#263238; opacity:0.95;">"Una excelente herramienta para enseñar valores a mis hijos."</p>
+                    <div class="testimonial-author" style="margin-top:0.7em; color:#1976d2;">- Ana, Mamá</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section" style="background: #e3f6ff; padding: 2em 0;">
+        <div class="cta-container" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2em;max-width:1100px;margin:0 auto;">
+            <div class="cta-content" style="flex:1 1 320px; min-width:220px; max-width:500px;">
+                <h2 class="cta-title" style="color:#1976d2; font-size:2rem; margin-bottom:0.5em;">¿Listo para comenzar la aventura?</h2>
+                <p class="cta-subtitle" style="color:#263238; opacity:0.9; margin-bottom:1em;">Únete a miles de niños que ya disfrutan de nuestros cuentos</p>
+                <a href="#cuentos" class="cta-button" style="display:inline-flex;align-items:center;gap:0.5em;background:#FFEB3B;color:#1976d2;font-weight:bold;padding:0.8em 2em;border-radius:24px;font-size:1.1em;text-decoration:none;box-shadow:0 2px 12px #b2eaff33;transition:background 0.18s;">
+                    <span class="btn-icon">🚀</span>
+                    Empezar Ahora
+                </a>
+            </div>
+            <div class="cta-image" style="flex:1 1 220px; min-width:180px; max-width:320px; display:flex;align-items:center;justify-content:center;">
+                <div class="cta-characters" style="font-size:2.2em;display:flex;gap:0.5em;">
+                    <span class="character">🧚‍♀️</span>
+                    <span class="character">🦄</span>
+                    <span class="character">🏰</span>
+                    <span class="character">🌟</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer-content" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 2.5em; padding: 2em 1em 1em 1em; background: #e3f6ff; border-top: 2px solid #b2eaff;">
+            <div class="footer-section" style="min-width:180px; flex:1;">
+                <h3 style="color:#1976d2; margin-bottom:0.5em;">Cuentos TAGUSA</h3>
+                <p style="color:#263238; opacity:0.85;">Creando momentos mágicos a través de la lectura</p>
+            </div>
+            <div class="footer-section" style="min-width:180px; flex:1;">
+                <h4 style="color:#1976d2; margin-bottom:0.5em;">Enlaces Útiles</h4>
+                <div class="footer-links" style="display:flex; flex-direction:column; gap:0.7em;">
+                    <a href="sobre.html" style="display:flex;align-items:center;gap:0.6em;color:#1976d2;text-decoration:none;font-weight:500;">
+                        <img src="img/ayuda.png" alt="Ayuda" class="footer-icon" style="width:28px;height:28px;">Ayuda
+                    </a>
+                    <a href="contacto.html" style="display:flex;align-items:center;gap:0.6em;color:#1976d2;text-decoration:none;font-weight:500;">
+                        <img src="img/mail.png" alt="Contacto" class="footer-icon" style="width:28px;height:28px;">Contacto
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section" style="min-width:180px; flex:1;">
+                <h4 style="color:#1976d2; margin-bottom:0.5em;">Síguenos</h4>
+                <div class="social-links" style="display:flex;gap:1em;">
+                    <a href="https://www.facebook.com/profile.php?id=61577748154817&locale=es_LA" target="_blank" rel="noopener" class="social-link" style="display:inline-block;">
+                        <img src="img/facebook.png" alt="Facebook" class="social-icon" style="width:32px;height:32px;">
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link" style="display:inline-block;">
+                        <img src="img/instagram.png" alt="Instagram" class="social-icon" style="width:32px;height:32px;">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="text-align:center; color:#1976d2; background:#e3f6ff; font-size:1rem; opacity:0.85; padding-bottom:1em;">
+            © 2024 TAGUSA | Un mundo de cuentos para aprender y soñar
+        </div>
+    </footer>
+
+    <script>
+        // Menú hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('open');
+                hamburger.classList.toggle('active');
+            });
+            hamburger.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    navLinks.classList.toggle('open');
+                    hamburger.classList.toggle('active');
+                }
+            });
+        }
+
+        // Contador animado
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+
+            // Si ya está animado, no volver a animar
+            if (element.dataset.animated === "true") return;
+            element.dataset.animated = "true";
+
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = Math.floor(current);
+
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                }
+            }, 16);
+        }
+
+        // Animar los contadores cuando aparece la sección (o siempre)
+        function animateStatsSection() {
+            const statsSection = document.querySelector('.stats-section');
+            if (!statsSection) return;
+            const counters = statsSection.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.dataset.target, 10);
+                animateCounter(counter, target);
+            });
+        }
+
+        // Definir IntersectionObserver para animaciones de aparición
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Si quieres animar los contadores solo cuando aparecen, puedes llamar aquí a animateStatsSection()
+                    // animateStatsSection();
+                }
+            });
+        }, { threshold: 0.2 });
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Observar elementos para animaciones
+            const elementsToObserve = document.querySelectorAll('.categoria-card, .feature-item, .testimonial-card, .stats-section');
+            elementsToObserve.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Añadir clase de carga
+            document.body.classList.add('loaded');
+
+            // Animar contadores SIEMPRE al cargar la página
+            animateStatsSection();
+
+            // Efecto parallax suave
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.floating-elements');
+                
+                parallaxElements.forEach(element => {
+                    const speed = 0.5;
+                    element.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            });
+
+            // Música de fondo en loop (autoplay compatible)
+            var bgMusic = document.getElementById('bgMusic');
+            if (bgMusic) {
+                bgMusic.volume = 0.1;
+                const playMusic = () => {
+                    bgMusic.play().catch(()=>{});
+                    document.body.removeEventListener('click', playMusic);
+                    document.body.removeEventListener('touchstart', playMusic);
+                };
+                bgMusic.play().catch(() => {
+                    document.body.addEventListener('click', playMusic);
+                    document.body.addEventListener('touchstart', playMusic);
+                });
+            }
+        });
+
+        // Overlay de bienvenida para activar audio
+        document.getElementById('startBtn').addEventListener('click', function() {
+            var bgMusic = document.getElementById('bgMusic');
+            bgMusic.currentTime = 0;
+            bgMusic.volume = 0.1;
+            bgMusic.muted = false;
+            bgMusic.play().then(() => {
+                document.getElementById('welcomeOverlay').style.display = 'none';
+            }).catch(() => {
+                alert('Por favor, revisa los permisos de sonido de tu navegador.');
+            });
+        });
+    </script>
+</body>
+</html>

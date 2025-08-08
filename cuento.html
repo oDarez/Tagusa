@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuento - TAGUSA</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="cuentos.js"></script>
+    <style>
+        /* ...existing styles... */
+        .respuestas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2em;
+            justify-content: center;
+            margin-bottom: 2.5em;
+        }
+        .controles-historia {
+            display: flex;
+            gap: 1.2em;
+            justify-content: center;
+            margin-top: 2.5em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio de fondo oculto -->
+    <audio id="cuentoAudio" src="sounds/cuento.ogg" loop preload="auto" style="display:none"></audio>
+
+    <div class="floating-elements">
+        <div class="float-star">⭐</div>
+        <div class="float-star">✨</div>
+        <div class="float-star">🌟</div>
+        <div class="float-cloud">☁️</div>
+        <div class="float-cloud">☁️</div>
+    </div>
+    <div class="container">
+        <header>
+            <div class="header-bar">
+                <div class="logo">
+                    <span class="logo-icon">📚</span>
+                    Cuentos TAGUSA
+                    <span class="logo-sparkle">✨</span>
+                </div>
+                <nav>
+                    <div class="hamburger" id="hamburger" aria-label="Abrir menú" tabindex="0">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="nav-links" id="navLinks">
+                        <a href="index.html" class="nav-link">
+                            <span class="btn-icon">🏠</span>
+                            <span class="sr-only">Inicio</span>
+                        </a>
+                        <a href="niveles.html" class="nav-link">
+                            <span class="btn-icon">📚</span>
+                            <span class="sr-only">Cuentos</span>
+                        </a>
+                        <a href="contacto.html" class="nav-link">
+                            <span class="btn-icon">📬</span>
+                            <span class="sr-only">Contacto</span>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main class="hero" style="min-height: 70vh; align-items: flex-start;">
+            <div class="hero-content" style="width: 100%; max-width: 700px; margin: 0 auto;">
+                <!-- Story Header -->
+                <div class="story-header" id="storyHeader" style="margin-bottom: 2rem;">
+                    <h1 class="hero-title" id="storyTitle" style="margin-bottom: 0.5rem;"></h1>
+                    <div class="hero-subtitle" id="storyMeta" style="color: var(--azul-oscuro); font-weight: 600;"></div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container" id="progressBar" style="display: none; margin-bottom: 2rem;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <!-- Story Content -->
+                <div class="story-content" id="storyContent"></div>
+
+                <!-- Interactive Section -->
+                <div class="interactive-section" id="interactiveSection" style="display: none;">
+                    <h3 id="interactiveQuestion" class="section-title"></h3>
+                    <div id="interactiveButtons" class="hero-buttons"></div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="navigation" id="storyNav" style="display: none;">
+                    <div class="hero-buttons">
+                        <button class="hero-btn" id="prevBtn">
+                            <span class="btn-icon">⬅️</span>
+                            Anterior
+                        </button>
+                        <button class="hero-btn" id="nextBtn">
+                            Siguiente
+                            <span class="btn-icon">➡️</span>
+                        </button>
+                        <button class="hero-btn" id="exitBtn" style="background: linear-gradient(90deg, var(--rosa), #ff9999);">
+                            <span class="btn-icon">❌</span>
+                            Salir
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="sobre.html" class="footer-link">
+                    <img src="img/ayuda.png" alt="Ayuda" class="footer-icon" style="width:24px;height:24px;margin-right:0.5rem;">
+                    Ayuda
+                </a>
+                <a href="contacto.html" class="footer-link">
+                    <img src="img/mail.png" alt="Contacto" class="footer-icon" style="width:24px;height:24px;margin-right:0.5rem;">
+                    Contacto
+                </a>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/profile.php?id=61577748154817&locale=es_LA" target="_blank" rel="noopener" class="social-link">
+                    <img src="img/facebook.png" alt="Facebook" style="width:24px;height:24px;">
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link">
+                    <img src="img/instagram.png" alt="Instagram" style="width:24px;height:24px;">
+                </a>
+            </div>
+            <div class="footer-copyright">
+                © 2024 TAGUSA | Un mundo de cuentos para aprender y soñar
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Reproducir sonido de fondo en loop al entrar
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('cuentoAudio');
+            if (audio) {
+                audio.volume = 0.1;
+                // Algunos navegadores requieren interacción del usuario para reproducir audio
+                const playAudio = () => {
+                    audio.play().catch(() => {});
+                    document.removeEventListener('click', playAudio);
+                };
+                audio.play().catch(() => {
+                    // Si falla, espera el primer click del usuario
+                    document.addEventListener('click', playAudio);
+                });
+            }
+            showStory();
+        });
+
+        // Utility functions
+        function getParams() {
+            const params = {};
+            window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str,key,value) {
+                params[key] = value;
+            });
+            return params;
+        }
+
+        // Sonido de click
+        function playClickSound() {
+            try {
+                const audio = new Audio('sounds/click.mp3');
+                audio.volume = 0.5;
+                audio.play();
+            } catch (e) { /* ignore */ }
+        }
+
+        // Story variables
+        let storyProgress = 0;
+        let storyTimeout = null;
+        let currentStory = null;
+
+        // Main story display function
+        function showStory() {
+            const params = getParams();
+            const nivel = params.nivel;
+            const grado = params.grado;
+            
+            if (!nivel || !grado || !window.cuentos || !window.cuentos[nivel] || !window.cuentos[nivel][grado]) {
+                document.getElementById('storyContent').innerHTML = `
+                    <div class="stat-item" style="color: var(--azul-oscuro); padding: 2rem;">
+                        <div class="stat-number" style="font-size: 4rem;">😕</div>
+                        <div class="stat-label" style="font-size: 1.2rem; color: var(--texto);">Cuento no encontrado</div>
+                    </div>
+                `;
+                document.getElementById('progressBar').style.display = 'none';
+                document.getElementById('storyNav').style.display = 'none';
+                return;
+            }
+
+            currentStory = window.cuentos[nivel][grado];
+            document.getElementById('storyHeader').style.display = 'block';
+            document.getElementById('storyTitle').textContent = currentStory.title || '';
+            document.getElementById('storyMeta').textContent = currentStory.meta || '';
+            document.getElementById('storyNav').style.display = 'block';
+            document.getElementById('progressBar').style.display = 'block';
+            
+            storyProgress = 0;
+            displayStoryContent();
+        }
+
+        function displayStoryContent() {
+            const storyContent = document.getElementById('storyContent');
+            const interactiveSection = document.getElementById('interactiveSection');
+            
+            if (storyTimeout) { 
+                clearTimeout(storyTimeout); 
+                storyTimeout = null; 
+            }
+            
+            storyContent.innerHTML = '';
+            interactiveSection.style.display = 'none';
+
+            // Update progress bar
+            const progressFill = document.getElementById('progressFill');
+            if (currentStory && currentStory.content && currentStory.content.length > 1) {
+                const percentage = ((storyProgress + 1) / currentStory.content.length) * 100;
+                progressFill.style.width = percentage + "%";
+            }
+
+            // Update navigation buttons
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const exitBtn = document.getElementById('exitBtn');
+            prevBtn.disabled = (storyProgress === 0);
+            nextBtn.disabled = (storyProgress >= currentStory.content.length - 1);
+
+            // Sonido en botones
+            prevBtn.onclick = function() { playClickSound(); previousScene(); };
+            nextBtn.onclick = function() { playClickSound(); nextScene(); };
+            exitBtn.onclick = function() { playClickSound(); window.location.href='niveles.html'; };
+
+            // Add disabled styles
+            prevBtn.classList.toggle('disabled', prevBtn.disabled);
+            nextBtn.classList.toggle('disabled', nextBtn.disabled);
+
+            // Display story content or moral
+            if (!currentStory || !currentStory.content || storyProgress >= currentStory.content.length) {
+                if (currentStory && currentStory.moral) {
+                    storyContent.innerHTML = `
+                        <div class="section-header" style="text-align: center;">
+                            <div class="section-title" style="color: var(--azul-oscuro); margin-bottom: 1rem;">
+                                <span class="title-icon">💡</span>
+                                Enseñanza
+                                <span class="title-icon">✨</span>
+                            </div>
+                            <div class="section-subtitle" style="font-size: 1.1rem; line-height: 1.6; color: var(--texto);">
+                                ${currentStory.moral}
+                            </div>
+                        </div>
+                    `;
+                }
+                return;
+            }
+
+            const currentItem = currentStory.content[storyProgress];
+            
+            if (currentItem.type === 'interactive') {
+                showInteractive(currentItem);
+                return;
+            }
+
+            if (currentItem.type === 'text') {
+                const p = document.createElement('div');
+                p.className = 'card-description';
+                p.style.cssText = 'font-size: 1.15rem; line-height: 1.7; color: var(--texto); text-align: justify; margin-bottom: 1rem; background: #fffbe7; border-radius: 16px; padding: 1.5em 1.5em;';
+                p.textContent = currentItem.content;
+                storyContent.appendChild(p);
+            } else if (currentItem.type === 'illustration') {
+                const div = document.createElement('div');
+                div.className = 'card-image';
+                div.style.cssText = 'width: 100%; max-width: 420px; height: auto; margin: 1.5rem auto; border-radius: 16px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #fffbe7; box-shadow: 0 2px 12px #b2eaff33;';
+                
+                if (/\.(png|jpg|jpeg|gif|svg)$/i.test(currentItem.content)) {
+                    const img = document.createElement('img');
+                    img.src = currentItem.content;
+                    img.alt = "Ilustración del cuento";
+                    img.style.cssText = 'width: 100%; max-width: 400px; height: auto; object-fit: contain; display: block; margin: 0 auto;';
+                    div.appendChild(img);
+                } else {
+                    div.style.cssText += 'font-size: 3rem;';
+                    div.textContent = currentItem.content;
+                }
+                storyContent.appendChild(div);
+            }
+
+            // Auto-advance for non-interactive content
+            if (storyProgress < currentStory.content.length - 1 && currentItem.type !== 'interactive') {
+                storyTimeout = setTimeout(() => {
+                    storyTimeout = null;
+                    storyProgress++;
+                    displayStoryContent();
+                }, 9000);
+            }
+        }
+
+        function showInteractive(item) {
+            const interactiveSection = document.getElementById('interactiveSection');
+            const questionEl = document.getElementById('interactiveQuestion');
+            const buttonsEl = document.getElementById('interactiveButtons');
+            
+            questionEl.textContent = item.question;
+            buttonsEl.innerHTML = '';
+            
+            item.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'hero-btn interactive-btn';
+                btn.textContent = option;
+                btn.onclick = () => {
+                    playClickSound();
+                    handleInteractiveChoice(index, item.correct, btn);
+                };
+                btn.style.animationDelay = (index * 0.1) + "s";
+                buttonsEl.appendChild(btn);
+            });
+            
+            interactiveSection.style.display = 'block';
+            setTimeout(() => {
+                interactiveSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+
+        function handleInteractiveChoice(chosen, correct, btn) {
+            const buttons = document.querySelectorAll('.interactive-btn');
+            
+            buttons.forEach((b, index) => {
+                b.style.transition = 'all 0.3s ease';
+                if (correct === null) {
+                    b.style.background = 'linear-gradient(90deg, var(--verde), #a8e6a3)';
+                    b.style.color = 'var(--azul-oscuro)';
+                } else if (index === correct) {
+                    b.style.background = 'linear-gradient(90deg, var(--verde), #a8e6a3)';
+                    b.style.color = 'var(--azul-oscuro)';
+                } else if (index === chosen && chosen !== correct) {
+                    b.style.background = 'linear-gradient(90deg, #ff6b6b, #ff8e8e)';
+                    b.style.color = 'white';
+                }
+                b.disabled = true;
+                b.style.cursor = 'not-allowed';
+            });
+            
+            // Bounce effect for chosen button
+            btn.style.transform = "scale(1.1)";
+            setTimeout(() => {
+                btn.style.transform = "scale(1)";
+            }, 300);
+            
+            setTimeout(() => {
+                document.getElementById('interactiveSection').style.display = 'none';
+                storyProgress++;
+                displayStoryContent();
+            }, 1600);
+        }
+
+        function previousScene() {
+            if (storyTimeout) { 
+                clearTimeout(storyTimeout); 
+                storyTimeout = null; 
+            }
+            if (storyProgress > 0) {
+                storyProgress--;
+                displayStoryContent();
+            }
+        }
+
+        function nextScene() {
+            if (storyTimeout) { 
+                clearTimeout(storyTimeout); 
+                storyTimeout = null; 
+            }
+            if (currentStory && storyProgress < currentStory.content.length - 1) {
+                storyProgress++;
+                displayStoryContent();
+            }
+        }
+
+        // Mobile menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+            
+            hamburger.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    navLinks.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                }
+            });
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            showStory();
+        });
+    </script>
+</body>
+</html>

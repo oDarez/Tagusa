@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuentos de Valores - TAGUSA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-bar">
+            <div class="logo">
+                <span class="logo-icon" aria-hidden="true">📚</span>
+                Cuentos TAGUSA
+                <span class="logo-sparkle" aria-hidden="true">✨</span>
+            </div>
+            <nav>
+                <div class="hamburger" id="hamburger" aria-label="Abrir menú" tabindex="0">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html" class="nav-link"><span>🏠</span>Inicio</a>
+                    <a href="niveles.html" class="nav-link"><span>📚</span>Cuentos</a>
+                    <a href="contacto.html" class="nav-link"><span>📬</span>Contacto</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero seccion-ondulada" id="valores-hero">
+            <div class="hero-img">
+                <img src="valores.png" alt="Valores" style="width:120px;height:120px;">
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">Cuentos sobre Valores</h1>
+                <p class="hero-subtitle" style="margin-bottom:1.2em;">
+                    Historias para aprender sobre la amistad, el respeto, la honestidad y la solidaridad.
+                </p>
+                <a href="niveles.html" class="hero-btn">Explorar cuentos</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 2.5em; padding: 2em 1em 1em 1em; background: #e3f6ff; border-top: 2px solid #b2eaff;">
+            <div class="footer-section" style="min-width:180px; flex:1;">
+                <h3 style="color:#1976d2; margin-bottom:0.5em;">Cuentos TAGUSA</h3>
+                <p style="color:#263238; opacity:0.85;">Creando momentos mágicos a través de la lectura</p>
+            </div>
+            <div class="footer-section" style="min-width:180px; flex:1;">
+                <h4 style="color:#1976d2; margin-bottom:0.5em;">Enlaces Útiles</h4>
+                <div class="footer-links" style="display:flex; flex-direction:column; gap:0.7em;">
+                    <a href="sobre.html" style="display:flex;align-items:center;gap:0.6em;color:#1976d2;text-decoration:none;font-weight:500;">
+                        <img src="img/ayuda.png" alt="Ayuda" class="footer-icon" style="width:28px;height:28px;">Ayuda
+                    </a>
+                    <a href="contacto.html" style="display:flex;align-items:center;gap:0.6em;color:#1976d2;text-decoration:none;font-weight:500;">
+                        <img src="img/mail.png" alt="Contacto" class="footer-icon" style="width:28px;height:28px;">Contacto
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section" style="min-width:180px; flex:1;">
+                <h4 style="color:#1976d2; margin-bottom:0.5em;">Síguenos</h4>
+                <div class="social-links" style="display:flex;gap:1em;">
+                    <a href="https://www.facebook.com/profile.php?id=61577748154817&locale=es_LA" target="_blank" rel="noopener" class="social-link" style="display:inline-block;">
+                        <img src="img/facebook.png" alt="Facebook" class="social-icon" style="width:32px;height:32px;">
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link" style="display:inline-block;">
+                        <img src="img/instagram.png" alt="Instagram" class="social-icon" style="width:32px;height:32px;">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="text-align:center; color:#1976d2; background:#e3f6ff; font-size:1rem; opacity:0.85; padding-bottom:1em;">
+            © 2024 TAGUSA | Un mundo de cuentos para aprender y soñar
+        </div>
+    </footer>
+    <script>
+    // Menú hamburguesa
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+        hamburger.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') navLinks.classList.toggle('open');
+        });
+    }
+    </script>
+</body>
+</html>
+        const themeBtn = document.getElementById('themeToggle');
+        if (themeBtn) {
+            themeBtn.onclick = toggleTheme;
+            themeBtn.onkeypress = function(e) {
+                if (e.key === 'Enter' || e.key === ' ') toggleTheme();
+            };
+        }
+    });
+    </script>
+</body>
+</html>

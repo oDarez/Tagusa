@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAGUSA - Niveles Educativos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="float-star">⭐</div>
+        <div class="float-star">✨</div>
+        <div class="float-star">🌟</div>
+        <div class="float-cloud">☁️</div>
+        <div class="float-cloud">☁️</div>
+    </div>
+
+    <header>
+        <div class="header-bar">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                Cuentos TAGUSA
+                <span class="logo-sparkle">✨</span>
+            </div>
+            <nav>
+                <div class="hamburger" id="hamburger" aria-label="Abrir menú" tabindex="0">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html" class="nav-link">
+                        <span class="btn-icon">🏠</span>Inicio
+                    </a>
+                    <a href="niveles.html" class="nav-link active">
+                        <span class="btn-icon">📚</span>Cuentos
+                    </a>
+                    <a href="contacto.html" class="nav-link">
+                        <span class="btn-icon">📬</span>Contacto
+                    </a>
+                    <!-- Botón de cambio de tema eliminado -->
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="categorias">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="title-icon">🎓</span>
+                    Selecciona tu Nivel Educativo
+                    <span class="title-icon">📖</span>
+                </h2>
+                <p class="section-subtitle">Descubre cuentos adaptados a tu edad y desarrollo</p>
+            </div>
+            
+            <div class="categorias-grid" id="mainLevels">
+                <div class="categoria-card" onclick="selectLevel('inicial')" tabindex="0" role="button" aria-label="Seleccionar Educación Inicial">
+                    <div class="card-image">
+                        <img src="img/inicial.png" alt="Educación Inicial">
+                        <div class="image-glow"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Educación Inicial</h3>
+                        <p class="card-description">Cuentos con colores brillantes, formas simples y sonidos divertidos para los más pequeños</p>
+                        <span class="card-badge">3-5 años</span>
+                    </div>
+                </div>
+                
+                <div class="categoria-card" onclick="selectLevel('primaria')" tabindex="0" role="button" aria-label="Seleccionar Educación Primaria">
+                    <div class="card-image">
+                        <img src="img/primaria.png" alt="Educación Primaria">
+                        <div class="image-glow"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Educación Primaria</h3>
+                        <p class="card-description">Historias con valores, aventuras y aprendizaje para desarrollar la imaginación</p>
+                        <span class="card-badge">6-11 años</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="categorias" id="gradeSelection" style="display:none;">
+            <div class="section-header">
+                <h2 class="section-title" id="gradeTitle">
+                    <span class="title-icon">📚</span>
+                    Selecciona tu Grado
+                </h2>
+                <p class="section-subtitle">Elige el grado que mejor se adapte a ti</p>
+            </div>
+            
+            <div class="categorias-grid" id="gradeGrid" style="justify-content: center; max-width: 800px; margin: 0 auto;">
+                <!-- Los grados se generarán dinámicamente aquí -->
+            </div>
+            
+            <div class="hero-buttons" style="margin-top: 2rem;">
+                <button class="hero-btn" onclick="showMainMenu()">
+                    <span class="btn-icon">⬅️</span>
+                    Volver a Niveles
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-icon">📚</span>
+                TAGUSA
+                <span class="logo-sparkle">✨</span>
+            </div>
+            <p class="footer-text">
+                Un mundo de cuentos mágicos para <span class="subtitle-accent">aprender y soñar</span>
+            </p>
+            <div class="footer-links">
+                <a href="sobre.html" class="footer-link">
+                    <img src="img/ayuda.png" alt="Ayuda" class="footer-icon" style="width:20px;height:20px;margin-right:0.5rem;">
+                    Ayuda
+                </a>
+                <a href="contacto.html" class="footer-link">
+                    <img src="img/mail.png" alt="Contacto" class="footer-icon" style="width:20px;height:20px;margin-right:0.5rem;">
+                    Contacto
+                </a>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/profile.php?id=61577748154817&locale=es_LA" target="_blank" rel="noopener" class="social-link" aria-label="Visitar Facebook">
+                    <img src="img/facebook.png" alt="Facebook" style="width:24px;height:24px;">
+                </a>
+                <a href="https://instagram.com" target="_blank" rel="noopener" class="social-link" aria-label="Visitar Instagram">
+                    <img src="img/instagram.png" alt="Instagram" style="width:24px;height:24px;">
+                </a>
+            </div>
+            <div class="footer-copyright">
+                © 2024 TAGUSA | Un mundo de cuentos para aprender y soñar
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Configuración de niveles y grados
+        const niveles = {
+            inicial: {
+                grados: ['1er Grado', '2do Grado', '3er Grado'],
+                titulo: '🌈 Educación Inicial - Selecciona tu Grado',
+                descripcion: 'Cuentos especialmente diseñados para cada etapa inicial'
+            },
+            primaria: {
+                grados: ['1er Grado', '2do Grado', '3er Grado', '4to Grado', '5to Grado', '6to Grado'],
+                titulo: '📚 Educación Primaria - Selecciona tu Grado',
+                descripcion: 'Historias que crecen contigo en cada grado'
+            }
+        };
+
+        let currentLevel = '';
+
+        function selectLevel(level) {
+            currentLevel = level;
+            const gradeSelection = document.getElementById('gradeSelection');
+            const gradeTitle = document.getElementById('gradeTitle');
+            const gradeGrid = document.getElementById('gradeGrid');
+            const mainLevels = document.getElementById('mainLevels');
+            
+            // Ocultar selección principal y mostrar grados
+            mainLevels.style.display = 'none';
+            gradeSelection.style.display = 'block';
+            
+            // Configurar título
+            gradeTitle.innerHTML = `
+                <span class="title-icon">${level === 'inicial' ? '🌈' : '📚'}</span>
+                ${niveles[level].titulo}
+            `;
+            
+            // Limpiar grid de grados
+            gradeGrid.innerHTML = '';
+            
+            // Crear botones de grados
+            niveles[level].grados.forEach((grade, index) => {
+                const gradeCard = document.createElement('div');
+                gradeCard.className = 'categoria-card';
+                gradeCard.style.width = '200px';
+                gradeCard.style.cursor = 'pointer';
+                gradeCard.tabIndex = 0;
+                gradeCard.setAttribute('role', 'button');
+                gradeCard.setAttribute('aria-label', `Seleccionar ${grade}`);
+                
+                gradeCard.innerHTML = `
+                    <div class="card-image" style="height: 100px; font-size: 3rem;">
+                        ${getGradeIcon(level, index + 1)}
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${grade}</h3>
+                        <p class="card-description">Cuentos para ${grade.toLowerCase()}</p>
+                    </div>
+                `;
+                
+                gradeCard.onclick = () => {
+                    window.location.href = `cuento.html?nivel=${level}&grado=${index + 1}`;
+                };
+                
+                gradeCard.onkeypress = (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        window.location.href = `cuento.html?nivel=${level}&grado=${index + 1}`;
+                    }
+                };
+                
+                gradeGrid.appendChild(gradeCard);
+            });
+            
+            // Scroll suave hacia la sección de grados
+            gradeSelection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function getGradeIcon(level, grado) {
+            const inicialIcons = ['🐣', '🐤', '🐥'];
+            const primariaIcons = ['📝', '📖', '📚', '🎓', '🏆', '🌟'];
+            
+            if (level === 'inicial') {
+                return inicialIcons[grado - 1] || '📚';
+            } else {
+                return primariaIcons[grado - 1] || '📚';
+            }
+        }
+
+        function showMainMenu() {
+            const gradeSelection = document.getElementById('gradeSelection');
+            const mainLevels = document.getElementById('mainLevels');
+            
+            gradeSelection.style.display = 'none';
+            mainLevels.style.display = 'flex';
+            
+            // Scroll suave hacia arriba
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Menú hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (hamburger && navLinks) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+            
+            hamburger.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    navLinks.classList.toggle('active');
+                    hamburger.classList.toggle('active');
+                }
+            });
+        }
+
+        // Modo claro/oscuro
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark-theme');
+            } else {
+                document.body.classList.remove('dark-theme');
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Restaurar tema guardado
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            }
+            
+            // Configurar botón de tema
+            // Eliminado: no hay botón de tema en esta página
+        });
+    </script>
+</body>
+</html>
