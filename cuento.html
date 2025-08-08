@@ -90,23 +90,32 @@
             text-align: center;
             font-size: 1.1rem;
         }
-        /* Alto contraste */
-        body.high-contrast, body.high-contrast .container {
-            background: #111 !important;
+        /* Alto contraste (modo oscuro mejorado) */
+        body.high-contrast {
+            background: linear-gradient(135deg, #181c22 0%, #23272f 100%) !important;
             color: #fff !important;
+        }
+        body.high-contrast .container {
+            background: rgba(30,32,36,0.98) !important;
+            color: #fff !important;
+            box-shadow: 0 4px 32px #000a;
         }
         body.high-contrast .card-description,
         body.high-contrast .card-image,
         body.high-contrast .interactive-section {
-            background: #222 !important;
+            background: #23272f !important;
             color: #fff !important;
             box-shadow: none !important;
         }
+        body.high-contrast .section-title,
+        body.high-contrast #interactiveQuestion {
+            color: #90caf9 !important;
+        }
         body.high-contrast .hero-btn,
         body.high-contrast .interactive-btn {
-            background: #000 !important;
+            background: #181c22 !important;
             color: #fff !important;
-            border: 2px solid #fff !important;
+            border: 2px solid #90caf9 !important;
         }
         body.high-contrast .hero-btn.disabled,
         body.high-contrast .interactive-btn:disabled {
@@ -114,26 +123,18 @@
             color: #bbb !important;
             border: 2px solid #bbb !important;
         }
-        /* Botón de alto contraste */
-        #contrastToggle {
-            position: fixed;
-            top: 18px;
-            right: 18px;
-            z-index: 1000;
-            background: #fff;
-            color: #222;
-            border: 2px solid #1565c0;
-            border-radius: 50%;
-            width: 48px;
-            height: 48px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 2px 8px #b2eaff33;
-            transition: background 0.2s, color 0.2s;
+        body.high-contrast #contrastToggle {
+            background: #23272f !important;
+            color: #90caf9 !important;
+            border: 2px solid #90caf9 !important;
         }
-        #contrastToggle:active {
-            background: #1565c0;
-            color: #fff;
+        body.high-contrast #contrastToggle:active {
+            background: #90caf9 !important;
+            color: #23272f !important;
+        }
+        body.high-contrast .floating-elements .float-star,
+        body.high-contrast .floating-elements .float-cloud {
+            filter: brightness(0.8) contrast(1.2) drop-shadow(0 0 8px #0008);
         }
         @media (max-width: 700px) {
             .container, .hero-content {
@@ -151,8 +152,13 @@
     </style>
 </head>
 <body>
-    <!-- Botón de alto contraste -->
-    <button id="contrastToggle" title="Alto contraste" aria-label="Alto contraste">🌓</button>
+    <!-- Botón de alto contraste (modo oscuro) -->
+    <button id="contrastToggle" title="Modo oscuro/alto contraste" aria-label="Modo oscuro"
+        style="position:fixed;top:18px;right:18px;z-index:2000;display:block;background:#fff;color:#222;
+        border:2px solid #1565c0;border-radius:50%;width:48px;height:48px;font-size:1.5rem;cursor:pointer;
+        box-shadow:0 2px 8px #b2eaff33;transition:background 0.2s,color 0.2s;">
+        🌓
+    </button>
 
     <!-- Audio de fondo oculto -->
     <audio id="cuentoAudio" src="sounds/cuento.ogg" loop preload="auto" style="display:none"></audio>
