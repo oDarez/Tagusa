@@ -5,16 +5,16 @@ window.cuentos = {
             meta: "Inicial - 1er Grado | Colores y Emociones",
             content: [
                 { type: 'illustration', content: 'img/colores.png' },
-                { type: 'text', content: 'En un jardín mágico, vivían los colores. Rojo estaba feliz, Azul saltaba de alegría y Amarillo brillaba como el sol.' },
-                { type: 'interactive', question: '¿Qué color te gusta más?', options: ['Rojo ❤️', 'Azul 💙', 'Amarillo 💛'], correct: null },
-                { type: 'text', content: 'Un día, los colores se mezclaron y crearon nuevos amigos: Naranja, Verde y Violeta.' },
+                { type: 'text', content: 'En un jardín mágico, vivían los colores. Rojo era valiente como un superhéroe, Azul tranquilo como el mar, y Amarillo alegre como el sol brillante.' },
+                { type: 'interactive', question: '¿Qué color te hace sentir feliz?', options: ['Rojo ❤️', 'Azul 💙', 'Amarillo 💛'], correct: null },
+                { type: 'text', content: 'Un día mágico, los colores jugaron a mezclarse: Rojo y Amarillo bailaron juntos y ¡puf! nació Naranja. Azul y Amarillo saltaron juntos y ¡sorpresa! apareció Verde. Rojo y Azul se abrazaron y ¡tada! crearon a Violeta.' },
                 { type: 'illustration', content: 'img/mezcla.png' },
-                { type: 'interactive', question: '¿Qué colores forman el verde?', options: ['Azul y amarillo', 'Rojo y azul', 'Rojo y amarillo'], correct: 0 },
-                { type: 'text', content: 'Los colores jugaban a esconderse detrás de las flores. Rojo se escondió detrás de una rosa, Azul detrás de una campanilla y Amarillo detrás de un girasol.' },
-                { type: 'interactive', question: '¿Dónde se escondió el color azul?', options: ['Detrás de una rosa', 'Detrás de una campanilla', 'Detrás de un girasol'], correct: 1 },
-                { type: 'text', content: 'Todos los colores aprendieron que juntos podían hacer cosas maravillosas.' }
+                { type: 'interactive', question: '¿Qué colores hacen el naranja?', options: ['Rojo y amarillo', 'Azul y amarillo', 'Rojo y azul'], correct: 0 },
+                { type: 'text', content: 'Los colores decidieron jugar al escondite en el jardín. Rojo se escondió en una rosa fragante, Azul nadó en un charco cristalino, y Amarillo se disfrazó de girasol.' },
+                { type: 'interactive', question: '¿Qué otras cosas son de color amarillo?', options: ['El sol', 'La luna', 'Las nubes'], correct: 0 },
+                { type: 'text', content: 'Al final del día, todos los colores pintaron juntos un hermoso arcoíris en el cielo.' }
             ],
-            moral: "Los colores nos ayudan a expresar cómo nos sentimos y juntos son más divertidos."
+            moral: "Cada color es especial, y cuando trabajamos juntos, creamos algo aún más hermoso."
         },
         2: {
             title: "🔺 Las Formas Aventureras",
