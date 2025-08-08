@@ -279,15 +279,35 @@
                 audio.volume = 0.1;
                 // Algunos navegadores requieren interacción del usuario para reproducir audio
                 const playAudio = () => {
-                    audio.play().catch(() => {});
-                    document.removeEventListener('click', playAudio);
+                    audio.play().catch(() => {
+                        const message = document.createElement('div');
+                        message.textContent = 'Haz clic en cualquier parte para activar el audio.';
+                        message.style.cssText = 'position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); background: #1565c0; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1000;';
+                        document.body.appendChild(message);
+                        document.addEventListener('click', () => {
+                            audio.play().catch(() => {});
+                            message.remove();
+                        }, { once: true });
+                    });
                 };
-                audio.play().catch(() => {
-                    // Si falla, espera el primer click del usuario
-                    document.addEventListener('click', playAudio);
-                });
+                playAudio();
             }
             showStory();
+        });
+
+        // Guardar y restaurar el estado del modo oscuro
+        document.addEventListener('DOMContentLoaded', function() {
+            const contrastToggle = document.getElementById('contrastToggle');
+            const isHighContrast = localStorage.getItem('high-contrast') === 'true';
+
+            if (isHighContrast) {
+                document.body.classList.add('high-contrast');
+            }
+
+            contrastToggle.onclick = function() {
+                document.body.classList.toggle('high-contrast');
+                localStorage.setItem('high-contrast', document.body.classList.contains('high-contrast'));
+            };
         });
 
         // Utility functions
@@ -345,14 +365,41 @@
         function displayStoryContent() {
             const storyContent = document.getElementById('storyContent');
             const interactiveSection = document.getElementById('interactiveSection');
-            
+            const nextBtn = document.getElementById('nextBtn');
+
             if (storyTimeout) { 
                 clearTimeout(storyTimeout); 
                 storyTimeout = null; 
             }
-            
+
             storyContent.innerHTML = '';
             interactiveSection.style.display = 'none';
+
+            // Desactivar botón "Siguiente" si no hay contenido
+            if (!currentStory || !currentStory.content || storyProgress >= currentStory.content.length) {
+                nextBtn.disabled = true;
+                nextBtn.classList.add('disabled');
+            } else {
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('disabled');
+            }
+
+            // Mostrar moraleja si no hay contenido
+            if (!currentStory || (!currentStory.content && currentStory.moral)) {
+                storyContent.innerHTML = `
+                    <div class="section-header" style="text-align: center;">
+                        <div class="section-title" style="color: var(--azul-oscuro); margin-bottom: 1rem;">
+                            <span class="title-icon">💡</span>
+                            Enseñanza
+                            <span class="title-icon">✨</span>
+                        </div>
+                        <div class="section-subtitle" style="font-size: 1.1rem; line-height: 1.6; color: var(--texto);">
+                            ${currentStory.moral}
+                        </div>
+                    </div>
+                `;
+                return;
+            }
 
             // Update progress bar
             const progressFill = document.getElementById('progressFill');
@@ -363,10 +410,8 @@
 
             // Update navigation buttons
             const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const exitBtn = document.getElementById('exitBtn');
-            prevBtn.disabled = (storyProgress === 0);
             nextBtn.disabled = (storyProgress >= currentStory.content.length - 1);
+            prevBtn.disabled = (storyProgress === 0);
 
             // Sonido en botones
             prevBtn.onclick = function() { playClickSound(); previousScene(); };
@@ -480,8 +525,16 @@
         // handleInteractiveChoice ahora requiere respuesta correcta para avanzar
         function handleInteractiveChoice(chosen, correct, btn, errorMsg) {
             const buttons = document.querySelectorAll('.interactive-btn');
-            // Si la pregunta es de opinión (correct === null)
+            const nextBtn = document.getElementById('nextBtn');
+
+            // Si la pregunta es de opinión (correct === null) o la respuesta es correcta
+            if (correct === null || chosen === correct) {
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('disabled');
+            }
+
             if (correct === null) {
+                // Manejo para preguntas de opinión
                 buttons.forEach((b) => {
                     b.style.background = 'linear-gradient(90deg, var(--verde), #a8e6a3)';
                     b.style.color = 'var(--azul-oscuro)';
@@ -492,10 +545,6 @@
                 setTimeout(() => {
                     btn.style.transform = "scale(1)";
                 }, 300);
-                // Habilita el botón siguiente
-                const nextBtn = document.getElementById('nextBtn');
-                nextBtn.disabled = false;
-                nextBtn.classList.remove('disabled');
                 return;
             }
 
